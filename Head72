@@ -1,0 +1,103 @@
+#Второе задание:
+
+
+a = int(input())
+b = int(input())
+
+c = abs(10**a - 10**b)
+
+sum_of_digits = sum(int(digit) for digit in str(c))
+
+print(sum_of_digits)
+
+
+#Третье задание:
+
+
+from collections import deque
+
+# Ввод данных
+n = int(input("Введите размер доски (n): "))
+start_col = input("Введите начальную позицию (буква): ")
+start_row = int(input("Введите начальную позицию (число): "))
+end_col = input("Введите конечную позицию (буква): ")
+end_row = int(input("Введите конечную позицию (число): "))
+
+# Преобразование буквенной колонки в числовую
+def col_to_index(col):
+    return ord(col) - ord('a') + 1
+
+# Преобразование начальной и конечной позиции в координаты
+start = (start_row, col_to_index(start_col))
+end = (end_row, col_to_index(end_col))
+
+# Проверка на возможность движения
+def is_valid(x, y):
+    return 1 <= x <= n and 1 <= y <= n
+
+# BFS для поиска минимального количества ходов
+def bfs(start, end):
+    queue = deque([(start, 0)])  # (позиция, количество ходов)
+    visited = set()
+    visited.add(start)
+
+    while queue:
+        current, moves = queue.popleft()
+        if current == end:
+            return moves
+        
+        # Возможные ходы
+        next_positions = [
+            (current[0] + 1, current[1] + 1),  # вниз вправо
+            (current[0] + 1, current[1] - 1)   # вниз влево
+        ]
+
+        for pos in next_positions:
+            if is_valid(pos[0], pos[1]) and pos not in visited:
+                visited.add(pos)
+                queue.append((pos, moves + 1))
+
+    return -1  # Если не удалось добраться до конечной позиции
+
+# Вывод результата
+result = bfs(start, end)
+print(result)
+
+
+#Четвёртое задание (Оно не совсем правильное):
+
+
+from collections import deque
+
+# Ввод зашифрованной формулы
+encoded_formula = input().strip()
+
+# Переменные для хранения расшифрованной формулы
+decoded_formula = ""
+current_element = ""
+current_count = 0
+
+# Проходим по каждому символу в зашифрованной формуле
+for char in encoded_formula:
+    if char.isupper():  # Если символ - заглавная буква, это новый элемент
+        if current_element:  # Если есть текущий элемент, добавляем его в формулу
+            if current_count > 1:
+                decoded_formula += current_element + str(current_count)
+            elif current_count == 1:
+                decoded_formula += current_element
+            
+        current_element = char  # Обновляем текущий элемент
+        current_count = 1  # Сбрасываем счетчик
+    elif char.isdigit():  # Если символ - цифра
+        current_count += int(char)  # Увеличиваем счетчик на значение цифры
+
+# Добавляем последний элемент в формулу
+if current_element:
+    if current_count > 1:
+        decoded_formula += current_element + str(current_count)
+    elif current_count == 1:
+        decoded_formula += current_element
+
+# Выводим расшифрованную формулу
+print(decoded_formula)
+
