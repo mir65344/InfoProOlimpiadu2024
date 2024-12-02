@@ -11,7 +11,7 @@ sum_of_digits = sum(int(digit) for digit in str(c))
 print(sum_of_digits)
 
 
-#Третье задание:
+#задание D:
 
 
 from collections import deque
@@ -64,7 +64,7 @@ result = bfs(start, end)
 print(result)
 
 
-#Четвёртое задание (Оно не совсем правильное):
+#последнее задание (Оно не совсем правильное):
 
 
 from collections import deque
