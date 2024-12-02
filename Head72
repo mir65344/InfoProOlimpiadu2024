@@ -101,3 +101,26 @@ if current_element:
 # Выводим расшифрованную формулу
 print(decoded_formula)
 
+
+Задание 3:
+
+
+# Чтение входных данных
+N = int(input())  # Количество руководителей процессов
+M = int(input())  # Количество медиа-специалистов
+K = int(input())  # Количество юристов
+
+# Общее количество участников в группе
+total_members = N + M + K
+
+# Минимальное количество юристов и медиа-специалистов
+min_lawyers = (total_members + 2) // 3  # Округление вверх
+min_media_specialists = (total_members + 2) // 3  # Округление вверх
+
+# Количество юристов и медиа-специалистов, которые нужно добавить
+lawyers_to_add = max(0, min_lawyers - K)
+media_specialists_to_add = max(0, min_media_specialists - M)
+
+# Вывод результатов
+print(lawyers_to_add)
+print(media_specialists_to_add)
