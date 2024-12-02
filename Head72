@@ -1,3 +1,12 @@
+
+def count_arrangements(n):
+    if n == 1:
+        return 1
+    return count_arrangements(n - 1) * (n + 1) // 2
+
+n = int(input())
+print(count_arrangements(n))
+```
 #Второе задание:
 
 
